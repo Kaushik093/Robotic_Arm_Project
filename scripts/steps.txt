@@ -1,0 +1,8 @@
+Steps : 
+1. Arm matrix : matrix that maps frame k to frame k-1 coordinates.
+
+Transformations [NEED FOR DH PARAMETERS] :
+rotate Lk-1 by theta about zk-1 , translates by d along z axis, translates by a along x axis
+and rotates by alpha wrt x axis.
+
+2.Get position vector from base to tool tip and orientation of tool wrt base.
