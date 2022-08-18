@@ -1,1 +1,1 @@
-# Robiotic_Arm_Project
+# Robotic_Arm_Project
