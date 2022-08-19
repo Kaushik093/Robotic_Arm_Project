@@ -28,10 +28,10 @@ DH_matrix= np.array([
 
 # Wrist to base transformation matrix : To control position 
 
-def calculate_matrix():
+def Calculate_matrix():
 
     for i in range(3):
-        Transform_matrix=np.array([[cos(DH_matrix[i][0]), -cos(DH_matrix[i][3])*sin(DH_matrix[i][0]) , sin(DH_matrix[i][3])*sin(DH_matrix[i][0]) , DH_matrix[i][2]*cos(DH_matrix[i][0]) ],
+        temp_matrix=np.array([[cos(DH_matrix[i][0]), -cos(DH_matrix[i][3])*sin(DH_matrix[i][0]) , sin(DH_matrix[i][3])*sin(DH_matrix[i][0]) , DH_matrix[i][2]*cos(DH_matrix[i][0]) ],
 
                         [ sin(DH_matrix[i][0]), cos(DH_matrix[i][3])*cos(DH_matrix[i][0]) , -sin(DH_matrix[i][3])*cos(DH_matrix[i][0]) , DH_matrix[i][2]*sin(DH_matrix[i][0]) ],
 
@@ -40,8 +40,11 @@ def calculate_matrix():
                         [0 , 0 , 0 , 1]
                         
                         ]) 
+        # Transformation_matrix=temp_matrix*Transformation_matrix
         
         
+        
+# def MultiplyMatrix():
 
 
 
