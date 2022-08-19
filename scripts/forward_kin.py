@@ -1,8 +1,6 @@
 import numpy as np
 from numpy import *
 import math
-# store dh param in a matrix 
-# Define Tk k-1 matrix 
 
 # Joint angles 
 t1=math.pi/2
