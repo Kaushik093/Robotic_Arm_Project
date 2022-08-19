@@ -61,7 +61,7 @@ def MultiplyMatrix(A,B):
     return result
 
 
-Calculate_matrix()
+Calculate_Position_matrix()
 
 
 # print(sin(DH_matrix[0][3]))
