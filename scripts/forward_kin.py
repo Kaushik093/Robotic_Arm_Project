@@ -28,7 +28,10 @@ DH_matrix= np.array([
 
 def Calculate_matrix():
 
-    for i in range(3):
+    Transformation_matrix=np.identity(4)
+    
+    for i in range(2):
+            
         temp_matrix=np.array([[cos(DH_matrix[i][0]), -cos(DH_matrix[i][3])*sin(DH_matrix[i][0]) , sin(DH_matrix[i][3])*sin(DH_matrix[i][0]) , DH_matrix[i][2]*cos(DH_matrix[i][0]) ],
 
                         [ sin(DH_matrix[i][0]), cos(DH_matrix[i][3])*cos(DH_matrix[i][0]) , -sin(DH_matrix[i][3])*cos(DH_matrix[i][0]) , DH_matrix[i][2]*sin(DH_matrix[i][0]) ],
@@ -38,12 +41,31 @@ def Calculate_matrix():
                         [0 , 0 , 0 , 1]
                         
                         ]) 
-        # Transformation_matrix=temp_matrix*Transformation_matrix
-        
-        
-        
-# def MultiplyMatrix():
 
+        Transformation_matrix= MultiplyMatrix( Transformation_matrix , temp_matrix )
+    
+    print(Transformation_matrix)
+ 
+ 
+    
+    
+def MultiplyMatrix(A,B):
+   
+    result= [[0,0,0,0],
+		[0,0,0,0],
+		[0,0,0,0],
+        [0,0,0,0]]
+
+    result = np.dot(A,B)
+
+    return result
+
+
+    # for r in result:
+	#     print(r)
+
+
+Calculate_matrix()
 
 
 # print(sin(DH_matrix[0][3]))
