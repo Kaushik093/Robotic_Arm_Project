@@ -1,7 +1,4 @@
 
-from tkinter import E
-from turtle import st
-from typing import Final
 import numpy as np
 from numpy import array
 import math
