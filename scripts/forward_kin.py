@@ -1,13 +1,16 @@
+
+from tkinter import E
+from turtle import st
+from typing import Final
 import numpy as np
 from numpy import array
 import math
 
-
-sin=float(math.sin)
-cos=float(math.cos)
+sin=math.sin
+cos=math.cos
 pi=np.pi
 
-print(type(sin))
+
 
 # Joint angles 
 
@@ -35,10 +38,12 @@ DH_matrix= np.array([
 
 def Calculate_Position_matrix():
 
-    Transformation_matrix=np.identity(4)
+    Transformation_matrix_pos=np.identity(4)
+    Transformation_matrix_orient=np.identity(4)
     
-    for i in range(3):
-            
+    for i in range(6):
+        
+
         temp_matrix=np.array([[cos(DH_matrix[i][0]), -cos(DH_matrix[i][3])*sin(DH_matrix[i][0]) , sin(DH_matrix[i][3])*sin(DH_matrix[i][0]) , DH_matrix[i][2]*cos(DH_matrix[i][0]) ],
 
                         [ sin(DH_matrix[i][0]), cos(DH_matrix[i][3])*cos(DH_matrix[i][0]) , -sin(DH_matrix[i][3])*cos(DH_matrix[i][0]) , DH_matrix[i][2]*sin(DH_matrix[i][0]) ],
@@ -47,18 +52,19 @@ def Calculate_Position_matrix():
 
                         [0 , 0 , 0 , 1]
                         
-                        ]) 
-        print(temp_matrix)
-        print('\n')
-        
+                        ])
+        if(i>3): 
+            Transformation_matrix_orient = MultiplyMatrix(Transformation_matrix_orient , temp_matrix)
+        else:
+            Transformation_matrix_pos = MultiplyMatrix( Transformation_matrix_pos , temp_matrix )
+    
+    Final_matrix=MultiplyMatrix(Transformation_matrix_pos , Transformation_matrix_orient)
+    
+    
 
-        Transformation_matrix= MultiplyMatrix( Transformation_matrix , temp_matrix )
-    
-    # print(Transformation_matrix)
+    print(Final_matrix)
 
- 
-    
-    
+   
 def MultiplyMatrix(A,B):
    
     result= [[0,0,0,0],
@@ -73,9 +79,6 @@ def MultiplyMatrix(A,B):
 
 
 Calculate_Position_matrix()
-
-
-# print(sin(DH_matrix[0][3]))
 
 
 # print(DH)
