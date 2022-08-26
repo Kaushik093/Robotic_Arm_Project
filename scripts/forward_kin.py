@@ -30,7 +30,7 @@ def Calculate_matrix():
     Transformation_matrix_pos=np.identity(4)
     Transformation_matrix_orient=np.identity(4)
     
-    for i in range(6):
+    for i in range(len(theta)):
         
 
         temp_matrix=np.array([[cos(theta[i]), -cos(alpha[i])*sin(theta[i]) , sin(alpha[i])*sin(theta[i]) , a[i]*cos(theta[i]) ],
@@ -44,30 +44,29 @@ def Calculate_matrix():
                         ])
                           
         if(i>3): 
-            Transformation_matrix_orient = MultiplyMatrix(Transformation_matrix_orient , temp_matrix)
+            Transformation_matrix_orient = np.dot(Transformation_matrix_orient , temp_matrix)  #Computing orientation matrix 
         else:
-            Transformation_matrix_pos = MultiplyMatrix( Transformation_matrix_pos , temp_matrix )
+            Transformation_matrix_pos =  np.dot( Transformation_matrix_pos , temp_matrix )
     
-    Final_matrix=MultiplyMatrix(Transformation_matrix_pos , Transformation_matrix_orient)
+    Final_matrix=np.dot(Transformation_matrix_pos , Transformation_matrix_orient)
+    # print(Final_matrix)
 
-    print(Final_matrix)
+    position_vector = [Final_matrix[0][3] , Final_matrix[1][3] , Final_matrix[2][3]]
+
+    # euler_from_matrix(Final_matrix)
+
+# def euler_from_matrix(Final_matrix):
+
+#     for i in Final_matrix:
+#         for j in i:
+#             orientation_vector=np.array([j])
     
-        
-   
-def MultiplyMatrix(A,B):
-   
-    result= [[0,0,0,0],
-		[0,0,0,0],
-		[0,0,0,0],
-        [0,0,0,0]]
-
-    result = np.dot(A,B)
-
-    # print(result)
-    return result
+#     print(orientation_vector)
 
 
 Calculate_matrix()
+
+
 
 
 # print(DH)
