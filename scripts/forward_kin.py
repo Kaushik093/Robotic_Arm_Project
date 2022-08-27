@@ -1,3 +1,4 @@
+from itertools import count
 import numpy as np
 import math
 
@@ -49,24 +50,26 @@ def Calculate_matrix():
             Transformation_matrix_pos =  np.dot( Transformation_matrix_pos , temp_matrix )
     
     Final_matrix=np.dot(Transformation_matrix_pos , Transformation_matrix_orient)
-    # print(Final_matrix)
+    
 
     position_vector = [Final_matrix[0][3] , Final_matrix[1][3] , Final_matrix[2][3]]
 
-    # euler_from_matrix(Final_matrix)
+    euler_from_matrix(Final_matrix)
 
-# def euler_from_matrix(Final_matrix):
+def euler_from_matrix(Final_matrix):
 
-#     for i in Final_matrix:
-#         for j in i:
-#             orientation_vector=np.array([j])
+    orientation_vector=np.zeros(3)
+
+
+    orientation_vector = np.array([[Final_matrix[0][0],Final_matrix[0][1],Final_matrix[0][2]],     # Extracting orientation vector from Final_matrix
+                                    [Final_matrix[1][0],Final_matrix[1][1],Final_matrix[1][2]],
+                                    [Final_matrix[2][0],Final_matrix[2][1],Final_matrix[2][2]],
+                                    ],dtype=float)                                                      
     
-#     print(orientation_vector)
+    
+
+    print(orientation_vector)
 
 
 Calculate_matrix()
 
-
-
-
-# print(DH)
