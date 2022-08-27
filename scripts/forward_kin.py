@@ -14,64 +14,59 @@ t4=0
 t5=pi/2
 t6=0
 
-# DH parameter matrix [theta d a {alpha}] for Intelledex 660T
+# DH parameter [theta d a {alpha}] for Intelledex 660T
 
-DH_matrix= np.array([
-    [t1,373.4,0,pi/2],
-    [t2,0,0,pi/2],
-    [t3,0,304.8,0],
-    [t4,0,304.8,0],
-    [t5,0,0,pi/2],
-    [t6,228.6,0,0]
-    ])
+theta=[t1,t2,t3,t4,t5,t6]
+d = [373.4,0,0,0,0,228.4]
+a=[0,0,304.8,304.8,0,0]
+alpha=[pi/2,pi/2,0,0,pi/2,0]
 
 # Transformation matrix for frame k-1 to k
 
 # Wrist to base transformation matrix : To control position 
 
-def Calculate_Position_matrix():
+def Calculate_matrix():
 
     Transformation_matrix_pos=np.identity(4)
     Transformation_matrix_orient=np.identity(4)
     
-    for i in range(6):
+    for i in range(len(theta)):
         
 
-        temp_matrix=np.array([[cos(DH_matrix[i][0]), -cos(DH_matrix[i][3])*sin(DH_matrix[i][0]) , sin(DH_matrix[i][3])*sin(DH_matrix[i][0]) , DH_matrix[i][2]*cos(DH_matrix[i][0]) ],
+        temp_matrix=np.array([[cos(theta[i]), -cos(alpha[i])*sin(theta[i]) , sin(alpha[i])*sin(theta[i]) , a[i]*cos(theta[i]) ],
 
-                        [ sin(DH_matrix[i][0]), cos(DH_matrix[i][3])*cos(DH_matrix[i][0]) , -sin(DH_matrix[i][3])*cos(DH_matrix[i][0]) , DH_matrix[i][2]*sin(DH_matrix[i][0]) ],
+                        [ sin(theta[i]), cos(alpha[i])*cos(theta[i]) , -sin(alpha[i])*cos(theta[i]) , a[i]*sin(theta[i]) ],
 
-                        [ 0  ,  sin(DH_matrix[i][3]) , cos(DH_matrix[i][3]) , DH_matrix[i][1] ],
+                        [ 0  ,  sin(alpha[i]) , cos(alpha[i]) , d[i] ],
 
                         [0 , 0 , 0 , 1]
                         
                         ])
+                          
         if(i>3): 
-            Transformation_matrix_orient = MultiplyMatrix(Transformation_matrix_orient , temp_matrix)
+            Transformation_matrix_orient = np.dot(Transformation_matrix_orient , temp_matrix)  #Computing orientation matrix 
         else:
-            Transformation_matrix_pos = MultiplyMatrix( Transformation_matrix_pos , temp_matrix )
+            Transformation_matrix_pos =  np.dot( Transformation_matrix_pos , temp_matrix )
     
-    Final_matrix=MultiplyMatrix(Transformation_matrix_pos , Transformation_matrix_orient)
+    Final_matrix=np.dot(Transformation_matrix_pos , Transformation_matrix_orient)
+    # print(Final_matrix)
+
+    position_vector = [Final_matrix[0][3] , Final_matrix[1][3] , Final_matrix[2][3]]
+
+    # euler_from_matrix(Final_matrix)
+
+# def euler_from_matrix(Final_matrix):
+
+#     for i in Final_matrix:
+#         for j in i:
+#             orientation_vector=np.array([j])
     
-    
-
-    print(Final_matrix)
-
-   
-def MultiplyMatrix(A,B):
-   
-    result= [[0,0,0,0],
-		[0,0,0,0],
-		[0,0,0,0],
-        [0,0,0,0]]
-
-    result = np.dot(A,B)
-
-    # print(result)
-    return result
+#     print(orientation_vector)
 
 
-Calculate_Position_matrix()
+Calculate_matrix()
+
+
 
 
 # print(DH)
