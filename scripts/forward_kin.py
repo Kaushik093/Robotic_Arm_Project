@@ -1,13 +1,9 @@
-
 import numpy as np
-from numpy import array
 import math
 
 sin=math.sin
 cos=math.cos
 pi=np.pi
-
-
 
 # Joint angles 
 
