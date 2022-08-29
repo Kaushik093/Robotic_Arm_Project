@@ -67,8 +67,13 @@ def euler_from_matrix(Final_matrix):
                                     ],dtype=float)                                                      
     
     
+    
+    pitch= - np.arcsin(Final_matrix[2][0])
+    roll = np.arctan2(Final_matrix[2][1] , Final_matrix[2][2])
+    yaw= np.arctan2(Final_matrix[1][0]/ float(cos(pitch)) , Final_matrix[0][0]/float(cos(theta)))
+    print(pitch," ",roll,)   
 
-    print(orientation_vector)
+    # print(orientation_vector)
 
 
 Calculate_matrix()
