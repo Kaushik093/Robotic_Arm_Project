@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: ""
+    relative_path: /home/kaushik/catkin_ws/src/Inverse-Kinematics/five_dof/robots/five_dof.URDF
+    xacro_args: ""
+  SRDF:
+    relative_path: config/five_dof.srdf
+  CONFIG:
+    author_name: ka
+    author_email: ka@ok.com
+    generated_timestamp: 1661614978
