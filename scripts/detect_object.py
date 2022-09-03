@@ -2,11 +2,11 @@
 import numpy as np
 import cv2
 
-webcam = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0)
 
 while(1):
 	
-	_, imageFrame = webcam.read()
+	_, imageFrame = cap.read()
 
 	hsvFrame = cv2.cvtColor(imageFrame, cv2.COLOR_BGR2HSV)
 
@@ -92,6 +92,6 @@ while(1):
 	
 	cv2.imshow("Cam Feed", imageFrame)
 	if cv2.waitKey(10) & 0xFF == ord('q'):
-		webcam.release()
+		cap.release()
 		cv2.destroyAllWindows()
 		break
