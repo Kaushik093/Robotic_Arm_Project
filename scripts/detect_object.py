@@ -1,8 +1,10 @@
 
+import math
+from turtle import distance, width
 import numpy as np
 import cv2
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(2)
 
 while(1):
 	
@@ -25,14 +27,14 @@ while(1):
 	kernal = np.ones((5, 5), "uint8")
 	
 	# For red color
-	red_mask = cv2.dilate(red_mask, kernal)
-	res_red = cv2.bitwise_and(imageFrame, imageFrame,
-							mask = red_mask)
+	# red_mask = cv2.dilate(red_mask, kernal)
+	# res_red = cv2.bitwise_and(imageFrame, imageFrame,
+	# 						mask = red_mask)
 	
-	# For green color
-	green_mask = cv2.dilate(green_mask, kernal)
-	res_green = cv2.bitwise_and(imageFrame, imageFrame,
-								mask = green_mask)
+	# # For green color
+	# green_mask = cv2.dilate(green_mask, kernal)
+	# res_green = cv2.bitwise_and(imageFrame, imageFrame,
+	# 							mask = green_mask)
 	
 	# For blue color
 	blue_mask = cv2.dilate(blue_mask, kernal)
@@ -40,38 +42,38 @@ while(1):
 							mask = blue_mask)
 
 	# Creating contour to track red color
-	contours, hierarchy = cv2.findContours(red_mask,
-										cv2.RETR_TREE,
-										cv2.CHAIN_APPROX_SIMPLE)
+	# contours, hierarchy = cv2.findContours(red_mask,
+	# 									cv2.RETR_TREE,
+	# 									cv2.CHAIN_APPROX_SIMPLE)
 	
-	for pic, contour in enumerate(contours):
-		area = cv2.contourArea(contour)
-		if(area > 300):
-			x, y, w, h = cv2.boundingRect(contour)
-			imageFrame = cv2.rectangle(imageFrame, (x, y),
-									(x + w, y + h),
-									(0, 0, 255), 2)
+	# for pic, contour in enumerate(contours):
+	# 	area = cv2.contourArea(contour)
+	# 	if(area > 300):
+	# 		x, y, w, h = cv2.boundingRect(contour)
+	# 		imageFrame = cv2.rectangle(imageFrame, (x, y),
+	# 								(x + w, y + h),
+	# 								(0, 0, 255), 2)
 			
-			cv2.putText(imageFrame, "Red Colour", (x, y),
-						cv2.FONT_HERSHEY_SIMPLEX, 1.0,
-						(0, 0, 255))	
+	# 		cv2.putText(imageFrame, "Red Colour", (x, y),
+	# 					cv2.FONT_HERSHEY_SIMPLEX, 1.0,
+	# 					(0, 0, 255))	
 
 	
-	contours, hierarchy = cv2.findContours(green_mask,
-										cv2.RETR_TREE,
-										cv2.CHAIN_APPROX_SIMPLE)
+	# contours, hierarchy = cv2.findContours(green_mask,
+	# 									cv2.RETR_TREE,
+	# 									cv2.CHAIN_APPROX_SIMPLE)
 	
-	for pic, contour in enumerate(contours):
-		area = cv2.contourArea(contour)
-		if(area > 300):
-			x, y, w, h = cv2.boundingRect(contour)
-			imageFrame = cv2.rectangle(imageFrame, (x, y),
-									(x + w, y + h),
-									(0, 255, 0), 2)
+	# for pic, contour in enumerate(contours):
+	# 	area = cv2.contourArea(contour)
+	# 	if(area > 300):
+	# 		x, y, w, h = cv2.boundingRect(contour)
+	# 		imageFrame = cv2.rectangle(imageFrame, (x, y),
+	# 								(x + w, y + h),
+	# 								(0, 255, 0), 2)
 			
-			cv2.putText(imageFrame, "Green Colour", (x, y),
-						cv2.FONT_HERSHEY_SIMPLEX,
-						1.0, (0, 255, 0))
+	# 		cv2.putText(imageFrame, "Green Colour", (x, y),
+	# 					cv2.FONT_HERSHEY_SIMPLEX,
+	# 					1.0, (0, 255, 0))
 
 	
 	contours, hierarchy = cv2.findContours(blue_mask,
@@ -79,17 +81,22 @@ while(1):
 										cv2.CHAIN_APPROX_SIMPLE)
 	for pic, contour in enumerate(contours):
 		area = cv2.contourArea(contour)
-		if(area > 300):
+		if(area > 1200):
 			x, y, w, h = cv2.boundingRect(contour)
 			imageFrame = cv2.rectangle(imageFrame, (x, y),
 									(x + w, y + h),
 									(255, 0, 0), 2)
-			
+			cv2.circle(imageFrame,(int(950),int(100)), 10, (255, 120, 0), -1)
+			cv2.line(imageFrame,(int(950),int(100)),(int(x+w/2),int(y+h/2)),(255, 120, 0),2)
+			distance =math.sqrt(((x+w/2)-950)**2+((y+h)/2-100)**2)
+			print(distance)
 			cv2.putText(imageFrame, "Blue Colour", (x, y),
 						cv2.FONT_HERSHEY_SIMPLEX,
 						1.0, (255, 0, 0))
-			
 	
+	width = imageFrame.shape[1]
+	height = imageFrame.shape[0]
+	# print(width,height)
 	cv2.imshow("Cam Feed", imageFrame)
 	if cv2.waitKey(10) & 0xFF == ord('q'):
 		cap.release()

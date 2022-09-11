@@ -3,7 +3,7 @@
   <arg name="paused" default="false"/>
   <arg name="gazebo_gui" default="true"/>
   <arg name="initial_joint_positions" doc="Initial joint configuration of the robot"
-       default=" -J joint1 0 -J joint2 1.57 -J joint3 1.3149 -J joint4 0 -J joint5 0"/>
+       default=" -J joint1 0 -J joint2 0 -J joint3 1.3149 -J joint4 0 -J joint5 0"/>
 
   <!-- startup simulated world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -13,7 +13,7 @@
   </include>
 
   <!-- send robot urdf to param server -->
-  <param name="robot_description" textfile="/home/kaushik/catkin_ws/src/Inverse-Kinematics/five_dof/robots/five_dof.URDF" />
+  <param name="robot_description" textfile="/home/kaushik/catkin_ws/src/Robotic_Arm_Project/description/urdf/five_dof.URDF" />
 
   <!-- unpause only after loading robot model -->
   <arg name="unpause" value="$(eval '' if arg('paused') else '-unpause')" />
