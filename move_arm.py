@@ -46,6 +46,7 @@ pose_target.position.z=0.3
 group.set_pose_target(pose_target)
 plan1=group.plan()       #Plan the path
 
+group.execute(plan1)     #Execute the path
 
 
 rospy.sleep(5)
