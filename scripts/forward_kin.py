@@ -1,12 +1,12 @@
 # Python code for computing forward kinematics for any robot with any number of DOF
 
-
 import numpy as np
 import math
 
 sin=math.sin
 cos=math.cos
-pi=np.pi
+pi=math.pi
+
 
 # Joint angles 
 
@@ -21,7 +21,7 @@ t6=0
 
 # Change the DH parameters to get the forward kinematics for any robot
 
-theta=[t1,t2,t3,t4,t5,t6]
+theta=[t1,t2,t3,t4,t5,t6],
 d = [373.4,0,0,0,0,228.4]
 a=[0,0,304.8,304.8,0,0]
 alpha=[pi/2,pi/2,0,0,pi/2,0]
@@ -37,7 +37,7 @@ def Calculate_matrix():
     
     for i in range(len(theta)):
         
-
+        
         temp_matrix=np.array([[cos(theta[i]), -cos(alpha[i])*sin(theta[i]) , sin(alpha[i])*sin(theta[i]) , a[i]*cos(theta[i]) ],
 
                         [ sin(theta[i]), cos(alpha[i])*cos(theta[i]) , -sin(alpha[i])*cos(theta[i]) , a[i]*sin(theta[i]) ],
@@ -47,11 +47,15 @@ def Calculate_matrix():
                         [0 , 0 , 0 , 1]
                         
                         ])
+
+                
                           
         if(i>3): 
             Transformation_matrix_orient = np.dot(Transformation_matrix_orient , temp_matrix)  #Computing orientation matrix 
         else:
             Transformation_matrix_pos =  np.dot( Transformation_matrix_pos , temp_matrix )
+
+    
     
     Final_matrix=np.dot(Transformation_matrix_pos , Transformation_matrix_orient)
     

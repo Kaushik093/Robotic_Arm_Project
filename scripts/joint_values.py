@@ -28,7 +28,7 @@ def main():
     while not rospy.is_shutdown():
         traj.header.stamp = rospy.Time.now()
         pts = JointTrajectoryPoint()
-        pts.positions = [-math.pi/2,-math.pi/3,0,0,0,0]
+        pts.positions = [-math.pi/2,-math.pi/3,0,0,0]
         pts.time_from_start = rospy.Duration(1.0)
 
         # Set the points to the trajectory
