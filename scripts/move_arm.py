@@ -8,8 +8,8 @@ import geometry_msgs.msg
 import moveit_msgs.msg
 from tf.transformations import quaternion_from_euler
 
-robot = moveit_commander.RobotCommander()
-scene = moveit_commander.PlanningSceneInterface()
+# robot = moveit_commander.RobotCommander()
+# scene = moveit_commander.PlanningSceneInterface()
 
 
 rospy.init_node("move_group_python",anonymous=True)
@@ -31,10 +31,8 @@ pose_target.position.x = 0.20754018659960138
 pose_target.position.y = 2.271022464834049e-06
 pose_target.position.z = 0.3765736583802459
 
-
+# group.set_velocity_scaling_factor(0.1)
 group.set_pose_target(pose_target)
-
-group.set_planner_id("RRTConnectkConfigDefault")
 
 plan=group.plan()
 group.go(wait=True)   # Execute the plan and wait for completion
