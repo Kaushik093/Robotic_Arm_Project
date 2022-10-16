@@ -1,6 +1,6 @@
 
 <robot
-  name="five_dof">
+  name="five_dof_manipualator">
   <link
     name="base_link">
     <inertial>
@@ -330,4 +330,9 @@
       effort="2"
       velocity="0.03" />
   </joint>
+  <gazebo>
+  <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+    <robotNamespace>/manipulator  </robotNamespace>
+  </plugin>
+</gazebo>
 </robot>

@@ -28,7 +28,7 @@ pose_target.orientation.z= q[2]
 pose_target.orientation.w = q[3]
 
 pose_target.position.x = 0.20754018659960138
-pose_target.position.y = 2.271022464834049e-06
+pose_target.position.y = 0
 pose_target.position.z = 0.3765736583802459
 
 # group.set_velocity_scaling_factor(0.1)
