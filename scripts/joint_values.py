@@ -36,6 +36,7 @@ def main():
         traj.points.append(pts)
         # Publish the message
         pub.publish(traj)
+        
     print("joint angles : ",group.get_current_joint_values())
 
 

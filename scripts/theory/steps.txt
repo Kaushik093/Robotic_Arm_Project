@@ -19,6 +19,9 @@ INVERSE KINEMATICS:
 
 Existence of a solution: Solvable if all joint variables can be found corresponding to a particular end effector location
 
-
+ROS HARDWARE INTERFACE :
+1. https://www.rosroboticslearning.com/ros-control
+2. https://github.com/bandasaikrishna/6-DOF_Manipulator/tree/master/six_dof_spatial_manipulator
+3. https://fjp.at/posts/ros/ros-control/#the-control-loop
 
 
