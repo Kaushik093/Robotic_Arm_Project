@@ -24,4 +24,5 @@ ROS HARDWARE INTERFACE :
 2. https://github.com/bandasaikrishna/6-DOF_Manipulator/tree/master/six_dof_spatial_manipulator
 3. https://fjp.at/posts/ros/ros-control/#the-control-loop
 
-
+Arduino loop to read publisher data :
+https://answers.ros.org/question/279501/arduino-code-for-custom-robot-arm/
