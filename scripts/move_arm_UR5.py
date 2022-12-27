@@ -5,11 +5,10 @@ import moveit_commander
 import geometry_msgs.msg
 from tf.transformations import quaternion_from_euler
 
-path=[]
 
 class get_path:
     def __init__(self):
-        
+        self.path = []
         self.group = moveit_commander.MoveGroupCommander("manipulator")
         self.pose_target = geometry_msgs.msg.Pose()
 
@@ -28,13 +27,13 @@ class get_path:
         self.group.go(wait=True)
         for pose in plan[1].joint_trajectory.points:
             position = pose.positions
-            path.append(position)
+            self.path.append(position)    # path is a list of joint angles at each point
+
         self.group.stop()
         self.group.clear_pose_targets()
-
+    def get_path(self):
+        return self.path
 
 rospy.init_node("move_group_python", anonymous=True)
-robot = get_path()
-robot.move()
-print(len(robot.path))
+
 # moveit_commander.roscpp_shutdown()
