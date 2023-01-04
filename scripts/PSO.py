@@ -61,7 +61,7 @@ def objective_function(x):
         # print("Pose 2: {}".format(end_effector_poses[i-1][0]))
         distance += np.linalg.norm(end_effector_poses[i][0] - end_effector_poses[i-1][0])
     
-    print("Distance: {}".format(distance))
+    # print("Distance: {}".format(distance))
    
 
     return distance
@@ -78,12 +78,14 @@ def generate_trajectory(path):
     # Call the PSO algorithm to compute the optimal joint angles
     xopt, fopt = pso(objective_function, lower_bounds, upper_bounds,  maxiter=100, swarmsize=50)   #fopt is the minimum distance 
 
-    print("Optimal joint angles: {}".format(xopt))
+    print("Optimal distance: {}".format(fopt))
     return xopt
 
 robot = get_path()  
 robot.move()
 path = robot.get_path()   #Initial path to be optimized
+
+# print("Path: {}".format(path))
 
 
 initial_joint_angles = [0, 0, 0, 0, 0, 0]   #Initial joint angles
